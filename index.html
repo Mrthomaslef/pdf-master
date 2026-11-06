@@ -18,7 +18,7 @@
       --bg-app: #f1f5f9;
       --bg-surface: #ffffff;
       --bg-elevated: #f8fafc;
-      --bg-glass: rgba(255, 255, 255, 0.88);
+      --bg-glass: rgba(255, 255, 255, 0.9);
       --text-primary: #0f172a;
       --text-secondary: #475569;
       --text-muted: #94a3b8;
@@ -38,7 +38,6 @@
       --radius-md: 12px;
       --radius-lg: 16px;
       --header-h: 54px;
-      --bottom-bar-h: 62px;
       --sidebar-w: 220px;
     }
 
@@ -46,7 +45,7 @@
       --bg-app: #0b0f19;
       --bg-surface: #131b2e;
       --bg-elevated: #1e293b;
-      --bg-glass: rgba(19, 27, 46, 0.88);
+      --bg-glass: rgba(19, 27, 46, 0.9);
       --text-primary: #f8fafc;
       --text-secondary: #cbd5e1;
       --text-muted: #64748b;
@@ -76,7 +75,6 @@
       -webkit-font-smoothing: antialiased;
     }
 
-    /* Layout Shell */
     .app-shell {
       display: flex;
       flex-direction: column;
@@ -95,8 +93,8 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 0 12px;
-      gap: 8px;
+      padding: 0 10px;
+      gap: 6px;
       z-index: 40;
       flex-shrink: 0;
     }
@@ -109,7 +107,6 @@
 
     .topbar-left {
       min-width: 0;
-      flex: 1;
     }
 
     .brand {
@@ -136,16 +133,15 @@
       background: transparent;
       border: 1px solid transparent;
       color: var(--text-primary);
-      font-size: 13.5px;
+      font-size: 13px;
       font-weight: 600;
-      padding: 4px 8px;
+      padding: 4px 6px;
       border-radius: 6px;
-      max-width: 220px;
-      min-width: 80px;
+      max-width: 170px;
+      min-width: 60px;
       text-overflow: ellipsis;
       white-space: nowrap;
       overflow: hidden;
-      transition: border-color 0.15s, background 0.15s;
     }
 
     .doc-title-input:hover, .doc-title-input:focus {
@@ -154,13 +150,58 @@
       outline: none;
     }
 
-    /* Buttons & Controls */
+    /* Mode Segmented Switch: LECTURE vs ÉDITION */
+    .mode-switch {
+      display: none;
+      align-items: center;
+      background: var(--bg-elevated);
+      border: 1px solid var(--border-strong);
+      border-radius: 999px;
+      padding: 3px;
+      gap: 2px;
+      flex-shrink: 0;
+    }
+
+    .mode-switch.visible {
+      display: inline-flex;
+    }
+
+    .mode-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      height: 30px;
+      padding: 0 12px;
+      border-radius: 999px;
+      border: none;
+      background: transparent;
+      color: var(--text-secondary);
+      font-size: 12.5px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.15s ease;
+      white-space: nowrap;
+    }
+
+    .mode-btn svg {
+      width: 15px;
+      height: 15px;
+      stroke-width: 2.2;
+    }
+
+    .mode-btn.active {
+      background: var(--accent);
+      color: #ffffff;
+      box-shadow: 0 2px 8px rgba(124, 58, 237, 0.35);
+    }
+
+    /* Buttons */
     .btn {
       display: inline-flex;
       align-items: center;
       justify-content: center;
       gap: 6px;
-      height: 36px;
+      height: 34px;
       padding: 0 10px;
       border-radius: var(--radius-sm);
       border: 1px solid transparent;
@@ -195,18 +236,11 @@
       cursor: not-allowed;
     }
 
-    .btn.active {
-      background: var(--accent-soft);
-      color: var(--accent);
-      border-color: rgba(139, 92, 246, 0.3);
-      font-weight: 600;
-    }
-
     .btn-primary {
       background: var(--accent);
       color: #ffffff !important;
       font-weight: 600;
-      padding: 0 14px;
+      padding: 0 12px;
       box-shadow: 0 2px 8px rgba(124, 58, 237, 0.35);
     }
 
@@ -215,7 +249,7 @@
     }
 
     .btn-icon {
-      width: 36px;
+      width: 34px;
       padding: 0;
     }
 
@@ -227,58 +261,7 @@
       flex-shrink: 0;
     }
 
-    /* Page Stepper & Zoom Pill */
-    .pill-group {
-      display: flex;
-      align-items: center;
-      background: var(--bg-elevated);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-sm);
-      height: 34px;
-      padding: 0 3px;
-      gap: 2px;
-    }
-
-    .pill-group .btn-icon {
-      width: 28px;
-      height: 28px;
-      border-radius: 6px;
-    }
-
-    .page-indicator {
-      font-size: 12.5px;
-      font-weight: 600;
-      font-variant-numeric: tabular-nums;
-      color: var(--text-primary);
-      padding: 0 6px;
-      display: flex;
-      align-items: center;
-      gap: 4px;
-    }
-
-    .page-indicator input {
-      width: 36px;
-      height: 24px;
-      text-align: center;
-      background: var(--bg-surface);
-      border: 1px solid var(--border-strong);
-      border-radius: 5px;
-      color: var(--text-primary);
-      font-size: 12.5px;
-      font-weight: 600;
-    }
-
-    .zoom-label {
-      font-size: 12px;
-      font-weight: 600;
-      font-variant-numeric: tabular-nums;
-      min-width: 44px;
-      text-align: center;
-      cursor: pointer;
-      color: var(--text-secondary);
-    }
-
-    /* Sub-toolbar for active tool options (Color, Size, Opacity) */
+    /* Sub-toolbar for active edit tool options (Color, Size, Stamps) */
     .tool-options-bar {
       height: 44px;
       background: var(--bg-surface);
@@ -328,7 +311,6 @@
       cursor: pointer;
     }
 
-    /* Stamp quick pills */
     .stamp-pill {
       padding: 3px 9px;
       border-radius: 999px;
@@ -357,7 +339,7 @@
       display: flex;
       flex-direction: column;
       z-index: 30;
-      transition: margin-left 0.2s cubic-bezier(0.16, 1, 0.3, 1), transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+      transition: margin-left 0.2s cubic-bezier(0.16, 1, 0.3, 1);
       flex-shrink: 0;
     }
 
@@ -421,7 +403,7 @@
       border-radius: 4px;
       overflow: hidden;
       box-shadow: var(--shadow-sm);
-      min-height: 120px;
+      min-height: 110px;
       align-items: center;
     }
 
@@ -473,20 +455,35 @@
       flex: 1;
       overflow: auto;
       position: relative;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding: 20px 12px 90px;
-      gap: 20px;
-      scroll-behavior: auto;
+      display: block;
+      padding: 20px 12px 100px;
       -webkit-overflow-scrolling: touch;
+      touch-action: pan-x pan-y;
     }
 
     .viewer-viewport.drawing-mode {
       touch-action: none;
     }
 
-    /* Filter modes for medical/dark reading */
+    .viewer-viewport.grab-pan {
+      cursor: grab;
+    }
+
+    .viewer-viewport.grab-pan:active {
+      cursor: grabbing;
+    }
+
+    .pages-inner {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      gap: 20px;
+      min-width: 100%;
+      width: max-content;
+      margin: 0 auto;
+    }
+
+    /* Filter modes for reading comfort */
     .viewer-viewport.filter-night .pdf-canvas {
       filter: invert(0.92) hue-rotate(180deg) contrast(1.05);
     }
@@ -504,7 +501,7 @@
       box-shadow: var(--page-shadow);
       border-radius: 3px;
       flex-shrink: 0;
-      transition: width 0.08s ease, height 0.08s ease;
+      transform-origin: top center;
     }
 
     .pdf-canvas {
@@ -524,6 +521,11 @@
       overflow: hidden;
     }
 
+    /* In pure Reading Mode, annotations are read-only so they never block scrolling or pinch-zoom */
+    body.mode-read .annotation-layer {
+      pointer-events: none;
+    }
+
     .draw-svg {
       position: absolute;
       inset: 0;
@@ -532,7 +534,7 @@
       pointer-events: none;
     }
 
-    /* Draggable & Editable Overlay Items (Text, Image, Signature, Stamp) */
+    /* Draggable & Editable Overlay Items */
     .anno-item {
       position: absolute;
       cursor: grab;
@@ -543,7 +545,8 @@
       transition: border-color 0.1s;
     }
 
-    .anno-item:hover, .anno-item.selected {
+    body.mode-edit .anno-item:hover,
+    body.mode-edit .anno-item.selected {
       border-color: var(--accent);
       background: rgba(124, 58, 237, 0.04);
     }
@@ -584,7 +587,6 @@
       object-fit: contain;
     }
 
-    /* Controls on selected annotation */
     .anno-controls {
       position: absolute;
       top: -28px;
@@ -600,7 +602,7 @@
       z-index: 25;
     }
 
-    .anno-item.selected .anno-controls {
+    body.mode-edit .anno-item.selected .anno-controls {
       display: flex;
     }
 
@@ -638,13 +640,13 @@
       box-shadow: var(--shadow-sm);
     }
 
-    .anno-item.selected .resize-handle {
+    body.mode-edit .anno-item.selected .resize-handle {
       display: block;
     }
 
     /* Empty / Drop State */
     .empty-state {
-      margin: auto;
+      margin: 40px auto;
       max-width: 520px;
       width: 100%;
       background: var(--bg-surface);
@@ -657,13 +659,11 @@
       align-items: center;
       gap: 16px;
       box-shadow: var(--shadow-md);
-      transition: border-color 0.2s, transform 0.2s;
     }
 
     .empty-state.dragover {
       border-color: var(--accent);
       background: var(--accent-soft);
-      transform: scale(1.01);
     }
 
     .empty-icon {
@@ -721,7 +721,6 @@
       font-weight: 500;
     }
 
-    /* Recent Files List in Empty State */
     .recent-section {
       width: 100%;
       margin-top: 12px;
@@ -784,8 +783,8 @@
       flex-shrink: 0;
     }
 
-    /* Floating Bottom Dock (Always accessible on Mobile & Desktop) */
-    .bottom-dock {
+    /* FLOATING DOCKS (Separated: Reading HUD vs Editing Toolbar) */
+    .bottom-hud {
       position: fixed;
       bottom: max(12px, env(safe-area-inset-bottom));
       left: 50%;
@@ -795,18 +794,93 @@
       -webkit-backdrop-filter: blur(20px);
       border: 1px solid var(--border-strong);
       border-radius: 999px;
-      padding: 5px 8px;
+      padding: 5px 10px;
       display: none;
       align-items: center;
-      gap: 4px;
+      gap: 6px;
       box-shadow: var(--shadow-lg);
       z-index: 45;
       max-width: calc(100vw - 16px);
       overflow-x: auto;
     }
 
-    .bottom-dock.visible {
+    .bottom-hud.visible {
       display: flex;
+    }
+
+    .hud-group {
+      display: flex;
+      align-items: center;
+      gap: 2px;
+      flex-shrink: 0;
+    }
+
+    .hud-btn {
+      width: 34px;
+      height: 34px;
+      border-radius: 999px;
+      border: none;
+      background: transparent;
+      color: var(--text-primary);
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.12s, transform 0.1s;
+      flex-shrink: 0;
+    }
+
+    .hud-btn svg {
+      width: 18px;
+      height: 18px;
+      stroke-width: 2.2;
+    }
+
+    .hud-btn:hover {
+      background: var(--bg-elevated);
+    }
+
+    .hud-btn:active {
+      transform: scale(0.92);
+    }
+
+    .hud-page-pill {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 13px;
+      font-weight: 700;
+      font-variant-numeric: tabular-nums;
+      padding: 0 4px;
+    }
+
+    .hud-page-pill input {
+      width: 38px;
+      height: 26px;
+      text-align: center;
+      background: var(--bg-elevated);
+      border: 1px solid var(--border-strong);
+      border-radius: 6px;
+      color: var(--text-primary);
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .hud-zoom-badge {
+      min-width: 52px;
+      height: 28px;
+      padding: 0 8px;
+      border-radius: 999px;
+      background: var(--accent-soft);
+      color: var(--accent);
+      font-size: 12px;
+      font-weight: 700;
+      font-variant-numeric: tabular-nums;
+      border: none;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
     }
 
     .dock-btn {
@@ -816,7 +890,7 @@
       justify-content: center;
       gap: 2px;
       min-width: 52px;
-      height: 46px;
+      height: 44px;
       padding: 0 8px;
       border-radius: 999px;
       border: none;
@@ -830,8 +904,8 @@
     }
 
     .dock-btn svg {
-      width: 19px;
-      height: 19px;
+      width: 18px;
+      height: 18px;
       stroke-width: 2;
     }
 
@@ -964,6 +1038,7 @@
       pointer-events: none;
       transition: all 0.2s ease;
       z-index: 120;
+      white-space: nowrap;
     }
 
     .toast.show {
@@ -971,7 +1046,6 @@
       transform: translateX(-50%) translateY(0);
     }
 
-    /* Responsive adjustments for Mobile */
     @media (max-width: 768px) {
       .hide-mobile {
         display: none !important;
@@ -982,7 +1056,7 @@
       }
 
       .doc-title-input {
-        max-width: 120px;
+        display: none !important;
       }
 
       .sidebar {
@@ -995,7 +1069,11 @@
 
       .viewer-viewport {
         padding: 12px 6px 96px;
-        gap: 12px;
+      }
+
+      .mode-btn {
+        padding: 0 10px;
+        font-size: 12px;
       }
 
       .dock-btn {
@@ -1006,79 +1084,58 @@
     }
   </style>
 </head>
-<body>
+<body class="mode-read">
   <div class="app-shell">
     <!-- TOP BAR -->
     <header class="topbar">
       <div class="topbar-left">
-        <button class="btn btn-icon" id="btnToggleSidebar" title=" Vignettes & Pages (P)" disabled>
+        <button class="btn btn-icon" id="btnToggleSidebar" title="Vignettes & Pages" disabled>
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 3v18"/></svg>
         </button>
-        <div class="brand" id="btnHome" title="Accueil / Ouvrir un PDF">
+        <div class="brand" id="btnHome" title="Ouvrir un autre PDF">
           <img src="assets/icon.svg" alt="PDF Master" />
           <span>PDF Master</span>
         </div>
         <input type="text" id="docTitleInput" class="doc-title-input" value="Document.pdf" title="Renommer le fichier" style="display:none;" />
       </div>
 
-      <!-- Center Navigation & Zoom -->
-      <div class="topbar-center" id="navControls" style="display:none;">
-        <div class="pill-group">
-          <button class="btn btn-icon" id="btnPrevPage" title="Page précédente (←)">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="m15 18-6-6 6-6"/></svg>
+      <!-- CENTER: EXPLICIT SEPARATION LECTURE vs ÉDITION -->
+      <div class="topbar-center">
+        <div class="mode-switch" id="modeSwitch">
+          <button class="mode-btn active" id="btnModeRead" title="Mode Lecture & Zoom fluide">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+            <span>Lecture</span>
           </button>
-          <div class="page-indicator">
-            <input type="number" id="pageInput" min="1" value="1" />
-            <span>/</span>
-            <span id="pageCountLabel">1</span>
-          </div>
-          <button class="btn btn-icon" id="btnNextPage" title="Page suivante (→)">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="m9 18 6-6-6-6"/></svg>
-          </button>
-        </div>
-
-        <div class="pill-group hide-mobile">
-          <button class="btn btn-icon" id="btnZoomOut" title="Zoom -">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M5 12h14"/></svg>
-          </button>
-          <span class="zoom-label" id="zoomLabel" title="Cliquer pour ajuster à la largeur">100%</span>
-          <button class="btn btn-icon" id="btnZoomIn" title="Zoom +">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M12 5v14M5 12h14"/></svg>
+          <button class="mode-btn" id="btnModeEdit" title="Mode Édition & Annotation">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg>
+            <span>Édition</span>
           </button>
         </div>
       </div>
 
-      <!-- Right Actions -->
+      <!-- RIGHT ACTIONS -->
       <div class="topbar-right">
         <button class="btn btn-icon" id="btnUndo" title="Annuler (Cmd/Ctrl+Z)" style="display:none;" disabled>
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M3 7v6h6"/><path d="M21 17a9 9 0 0 0-9-9 9 9 0 0 0-6 2.3L3 13"/></svg>
         </button>
 
-        <button class="btn btn-icon" id="btnSearchToggle" title="Rechercher dans le PDF (Cmd/Ctrl+F)" style="display:none;">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+        <button class="btn btn-icon" id="btnThemeToggle" title="Thème clair / sombre">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>
         </button>
 
-        <button class="btn btn-icon" id="btnFilterCycle" title="Mode de lecture : Normal / Nuit / Sépia / Contraste" style="display:none;">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="10"/><path d="M12 2a10 10 0 0 0 0 20Z" fill="currentColor"/></svg>
-        </button>
-
-        <button class="btn btn-icon" id="btnThemeToggle" title="Basculer thème clair/sombre">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" id="iconTheme"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>
-        </button>
-
-        <button class="btn" id="btnOpenPdf" title="Ouvrir un PDF">
+        <button class="btn" id="btnOpenPdf" title="Ouvrir un fichier PDF">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
           <span class="hide-mobile">Ouvrir</span>
         </button>
 
         <button class="btn btn-primary" id="btnSavePdf" title="Exporter & Télécharger le PDF modifié (Cmd/Ctrl+S)" style="display:none;">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-          <span>Exporter</span>
+          <span class="hide-mobile">Exporter</span>
         </button>
       </div>
     </header>
 
-    <!-- CONTEXTUAL OPTIONS BAR (Colors, Stroke, Stamps) -->
+    <!-- CONTEXTUAL OPTIONS BAR (Only shown in ÉDITION mode when an active tool needs options) -->
     <div class="tool-options-bar" id="toolOptionsBar">
       <div class="option-group" id="colorGroup">
         <span>Couleur :</span>
@@ -1090,10 +1147,10 @@
         <button class="color-swatch" data-color="#7c3aed" style="background:#7c3aed" title="Violet"></button>
       </div>
 
-      <div class="divider-v"></div>
+      <div class="divider-v" id="optDivider"></div>
 
       <div class="option-group" id="sizeGroup">
-        <span id="sizeLabel">Taille :</span>
+        <span>Taille :</span>
         <input type="range" id="sizeSlider" class="range-slider" min="1" max="36" value="16" />
         <span id="sizeValue">16</span>
       </div>
@@ -1155,7 +1212,7 @@
           </div>
           <div class="empty-title">PDF Master</div>
           <p class="empty-desc">
-            Lecteur & éditeur PDF ultra-fluide, sans publicité ni serveur. Tout reste 100% en local sur votre appareil (Mac, PC, iPhone, iPad, Android).
+            Lecteur & éditeur PDF ultra-fluide avec modes <strong>Lecture</strong> (zoom pincement, double-tap, filtres nuit/sépia) et <strong>Édition</strong> séparés.
           </p>
           <div class="empty-actions">
             <button class="btn btn-primary" id="btnEmptyOpen" style="height:42px; padding:0 20px; font-size:14px;">
@@ -1167,11 +1224,11 @@
             </button>
           </div>
           <div class="feature-badges">
-            <span class="badge">Lecture 60 fps</span>
-            <span class="badge">Texte & Remplissage</span>
+            <span class="badge">Mode Lecture dédié</span>
+            <span class="badge">Zoom Pincement & Molette</span>
+            <span class="badge">Mode Édition séparé</span>
             <span class="badge">Signature & Tampons</span>
-            <span class="badge">Surligneur & Stylo</span>
-            <span class="badge">Rotation / Fusion / Tri</span>
+            <span class="badge">100% Local</span>
           </div>
 
           <div class="recent-section" id="recentSection">
@@ -1184,15 +1241,65 @@
         </div>
 
         <!-- Pages Container -->
-        <div id="pagesContainer" style="display:none; flex-direction:column; align-items:center; gap:20px; width:100%;"></div>
+        <div id="pagesContainer" class="pages-inner"></div>
       </main>
     </div>
 
-    <!-- FLOATING BOTTOM TOOL DOCK (Mobile & Desktop) -->
-    <nav class="bottom-dock" id="bottomDock">
-      <button class="dock-btn active" data-tool="pan" title="Lecture & Déplacement (V)">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M18 11V6a2 2 0 0 0-2-2v0a2 2 0 0 0-2 2v0"/><path d="M14 10V4a2 2 0 0 0-2-2v0a2 2 0 0 0-2 2v2"/><path d="M10 10.5V6a2 2 0 0 0-2-2v0a2 2 0 0 0-2 2v8"/><path d="M18 8a2 2 0 1 1 4 0v6a8 8 0 0 1-8 8h-2c-2.8 0-4.5-.86-5.99-2.34l-3.6-3.6a2 2 0 0 1 2.83-2.82L7 15"/></svg>
-        <span>Lire</span>
+    <!-- ================================================================= -->
+    <!-- 1. FLOATING BAR FOR "MODE LECTURE" (Zoom, Page Nav, Search, Contrast) -->
+    <!-- ================================================================= -->
+    <nav class="bottom-hud" id="readHud">
+      <!-- Page Stepper -->
+      <div class="hud-group">
+        <button class="hud-btn" id="btnPrevPage" title="Page précédente (←)">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="m15 18-6-6 6-6"/></svg>
+        </button>
+        <div class="hud-page-pill">
+          <input type="number" id="pageInput" min="1" value="1" />
+          <span>/</span>
+          <span id="pageCountLabel">1</span>
+        </div>
+        <button class="hud-btn" id="btnNextPage" title="Page suivante (→)">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="m9 18 6-6-6-6"/></svg>
+        </button>
+      </div>
+
+      <div class="divider-v"></div>
+
+      <!-- Zoom Controls (Mobile & Desktop) -->
+      <div class="hud-group">
+        <button class="hud-btn" id="btnZoomOut" title="Dézoomer (-)">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/><path d="M8 11h6"/></svg>
+        </button>
+        <button class="hud-zoom-badge" id="zoomLabel" title="Toucher pour réinitialiser le zoom à 100%">100%</button>
+        <button class="hud-btn" id="btnZoomIn" title="Zoomer (+)">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/><path d="M11 8v6M8 11h6"/></svg>
+        </button>
+      </div>
+
+      <div class="divider-v"></div>
+
+      <!-- Reading Tools: Rotate, Night/Sepia Filter, Search -->
+      <div class="hud-group">
+        <button class="hud-btn" id="btnReadRotate" title="Pivoter la page de 90° (R)">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M21 12a9 9 0 1 1-9-9c2.52 0 4.93 1 6.74 2.74L21 8"/><path d="M21 3v5h-5"/></svg>
+        </button>
+        <button class="hud-btn" id="btnFilterCycle" title="Mode de lecture : Normal / Nuit / Sépia / Contraste">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="10"/><path d="M12 2a10 10 0 0 0 0 20Z" fill="currentColor"/></svg>
+        </button>
+        <button class="hud-btn" id="btnSearchToggle" title="Rechercher dans le PDF (Cmd/Ctrl+F)">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+        </button>
+      </div>
+    </nav>
+
+    <!-- ================================================================= -->
+    <!-- 2. FLOATING BAR FOR "MODE ÉDITION" (Select, Text, Highlight, Pen, Sign...) -->
+    <!-- ================================================================= -->
+    <nav class="bottom-hud" id="editDock">
+      <button class="dock-btn active" data-tool="select" title="Déplacer / Sélectionner une annotation (V)">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="m3 3 7.07 16.97 2.51-7.39 7.39-2.51L3 3z"/><path d="m13 13 6 6"/></svg>
+        <span>Sélect.</span>
       </button>
 
       <button class="dock-btn" data-tool="text" title="Ajouter du texte (T)">
@@ -1228,11 +1335,6 @@
       <button class="dock-btn" id="btnInsertImage" title="Insérer une image / photo">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
         <span>Image</span>
-      </button>
-
-      <button class="dock-btn" id="btnRotateCurrent" title="Pivoter la page actuelle de 90° (R)">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M21 12a9 9 0 1 1-9-9c2.52 0 4.93 1 6.74 2.74L21 8"/><path d="M21 3v5h-5"/></svg>
-        <span>Pivoter</span>
       </button>
     </nav>
 
@@ -1273,38 +1375,35 @@
   </div>
 
   <script>
-    // Configure PDF.js worker
     if (window.pdfjsLib) {
       pdfjsLib.GlobalWorkerOptions.workerSrc = 'vendor/pdf.worker.min.js';
     }
 
-    // Application State
     const state = {
-      pdfBytes: null,        // Current working Uint8Array of the PDF
-      pdfDoc: null,          // PDF.js document proxy
+      pdfBytes: null,
+      pdfDoc: null,
       fileName: 'Document.pdf',
       pageCount: 0,
       currentPage: 1,
-      zoom: 1.0,             // Scale multiplier relative to fit-width
-      baseWidth: 780,        // Reference width at zoom 1.0
-      activeTool: 'pan',     // 'pan' | 'text' | 'highlight' | 'pen' | 'whiteout' | 'stamp'
+      appMode: 'read',       // 'read' (Lecture) | 'edit' (Édition)
+      zoom: 1.0,             // 0.5x to 4.0x
+      baseWidth: 780,
+      activeTool: 'select',  // In edit mode: 'select' | 'text' | 'highlight' | 'pen' | 'whiteout' | 'stamp'
       toolColor: '#ef4444',
       toolSize: 16,
       stampText: 'SIGNÉ',
-      filterMode: 0,         // 0: normal, 1: night, 2: sepia, 3: high-contrast
-      // Per-page annotations: pageIndex (1-based) -> Array of annotation objects
+      filterMode: 0,
       annotations: {},
       undoStack: [],
       searchMatches: [],
       searchIdx: -1,
       renderedPages: new Set(),
-      pageDimensions: {}     // pageNum -> { width, height } at scale 1
+      pageDimensions: {}
     };
 
     const FILTER_CLASSES = ['', 'filter-night', 'filter-sepia', 'filter-contrast'];
     const FILTER_NAMES = ['Lecture Normale', 'Mode Nuit (Inversé)', 'Mode Sépia', 'Contraste Élevé'];
 
-    // DOM Elements
     const els = {
       viewport: document.getElementById('viewport'),
       emptyState: document.getElementById('emptyState'),
@@ -1314,7 +1413,11 @@
       sidebarPageCount: document.getElementById('sidebarPageCount'),
       btnToggleSidebar: document.getElementById('btnToggleSidebar'),
       docTitleInput: document.getElementById('docTitleInput'),
-      navControls: document.getElementById('navControls'),
+      modeSwitch: document.getElementById('modeSwitch'),
+      btnModeRead: document.getElementById('btnModeRead'),
+      btnModeEdit: document.getElementById('btnModeEdit'),
+      readHud: document.getElementById('readHud'),
+      editDock: document.getElementById('editDock'),
       pageInput: document.getElementById('pageInput'),
       pageCountLabel: document.getElementById('pageCountLabel'),
       zoomLabel: document.getElementById('zoomLabel'),
@@ -1322,11 +1425,9 @@
       btnUndo: document.getElementById('btnUndo'),
       btnSearchToggle: document.getElementById('btnSearchToggle'),
       btnFilterCycle: document.getElementById('btnFilterCycle'),
-      bottomDock: document.getElementById('bottomDock'),
       toolOptionsBar: document.getElementById('toolOptionsBar'),
       sizeSlider: document.getElementById('sizeSlider'),
       sizeValue: document.getElementById('sizeValue'),
-      sizeLabel: document.getElementById('sizeLabel'),
       stampGroup: document.getElementById('stampGroup'),
       fileInputPdf: document.getElementById('fileInputPdf'),
       fileInputMerge: document.getElementById('fileInputMerge'),
@@ -1341,16 +1442,15 @@
       toast: document.getElementById('toast')
     };
 
-    // Toast helper
     let toastTimer = null;
     function showToast(msg) {
       els.toast.textContent = msg;
       els.toast.classList.add('show');
       clearTimeout(toastTimer);
-      toastTimer = setTimeout(() => els.toast.classList.remove('show'), 2300);
+      toastTimer = setTimeout(() => els.toast.classList.remove('show'), 2200);
     }
 
-    // Theme management
+    // Theme
     function initTheme() {
       const saved = localStorage.getItem('pdfmaster_theme') || 'dark';
       document.documentElement.classList.toggle('dark', saved === 'dark');
@@ -1364,19 +1464,50 @@
       document.getElementById('metaThemeColor').content = isDark ? '#0b0f19' : '#f1f5f9';
     });
 
+    // =========================================================================
+    // MODE SEPARATION: LECTURE vs ÉDITION
+    // =========================================================================
+    function setAppMode(mode) {
+      if (!state.pdfDoc) return;
+      state.appMode = mode;
+
+      document.body.classList.toggle('mode-read', mode === 'read');
+      document.body.classList.toggle('mode-edit', mode === 'edit');
+
+      els.btnModeRead.classList.toggle('active', mode === 'read');
+      els.btnModeEdit.classList.toggle('active', mode === 'edit');
+
+      if (mode === 'read') {
+        els.readHud.classList.add('visible');
+        els.editDock.classList.remove('visible');
+        els.toolOptionsBar.classList.remove('visible');
+        els.viewport.classList.remove('drawing-mode');
+        document.querySelectorAll('.anno-item.selected').forEach(el => el.classList.remove('selected'));
+        showToast('Mode Lecture (Zoom & Défilement)');
+      } else {
+        els.readHud.classList.remove('visible');
+        els.editDock.classList.add('visible');
+        setActiveTool(state.activeTool || 'select');
+        showToast('Mode Édition');
+      }
+    }
+
+    els.btnModeRead.addEventListener('click', () => setAppMode('read'));
+    els.btnModeEdit.addEventListener('click', () => setAppMode('edit'));
+
     // Filter mode cycle
     els.btnFilterCycle.addEventListener('click', () => {
-      if ( FILTER_CLASSES[state.filterMode] ) {
+      if (FILTER_CLASSES[state.filterMode]) {
         els.viewport.classList.remove(FILTER_CLASSES[state.filterMode]);
       }
       state.filterMode = (state.filterMode + 1) % FILTER_CLASSES.length;
-      if ( FILTER_CLASSES[state.filterMode] ) {
+      if (FILTER_CLASSES[state.filterMode]) {
         els.viewport.classList.add(FILTER_CLASSES[state.filterMode]);
       }
       showToast(FILTER_NAMES[state.filterMode]);
     });
 
-    // IndexedDB for Recent PDFs (100% local persistence)
+    // IndexedDB Recent PDFs
     const DB_NAME = 'PdfMasterDB';
     const STORE_NAME = 'recentFiles';
 
@@ -1404,9 +1535,7 @@
           updatedAt: Date.now()
         });
         loadRecentList();
-      } catch (e) {
-        // Ignore storage quota errors silently
-      }
+      } catch (e) {}
     }
 
     async function loadRecentList() {
@@ -1450,16 +1579,13 @@
       return String(str).replace(/[&<>"']/g, m => ({ '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;' }[m]));
     }
 
-    // Load recent list on boot
     loadRecentList();
 
     // Open PDF triggers
     document.getElementById('btnOpenPdf').addEventListener('click', () => els.fileInputPdf.click());
     document.getElementById('btnEmptyOpen').addEventListener('click', () => els.fileInputPdf.click());
     document.getElementById('btnHome').addEventListener('click', () => {
-      if (state.pdfDoc) {
-        els.fileInputPdf.click();
-      }
+      if (state.pdfDoc) els.fileInputPdf.click();
     });
 
     els.fileInputPdf.addEventListener('change', async (e) => {
@@ -1470,7 +1596,7 @@
       e.target.value = '';
     });
 
-    // Drag & Drop anywhere on window
+    // Drag & Drop
     window.addEventListener('dragover', (e) => {
       e.preventDefault();
       els.emptyState.classList.add('dragover');
@@ -1486,44 +1612,40 @@
         const buf = await file.arrayBuffer();
         await loadPdfFromBytes(new Uint8Array(buf), file.name);
       } else if (file && file.type.startsWith('image/') && state.pdfDoc) {
+        setAppMode('edit');
         insertImageFile(file);
       }
     });
 
-    // Generate Demo PDF with pdf-lib
+    // Demo PDF
     document.getElementById('btnDemoPdf').addEventListener('click', async () => {
       const { PDFDocument, StandardFonts, rgb } = PDFLib;
       const doc = await PDFDocument.create();
       const fontBold = await doc.embedFont(StandardFonts.HelveticaBold);
       const fontReg = await doc.embedFont(StandardFonts.Helvetica);
 
-      // Page 1
-      const p1 = doc.addPage([595.28, 841.89]); // A4
+      const p1 = doc.addPage([595.28, 841.89]);
       p1.drawRectangle({ x: 45, y: 725, width: 505, height: 72, color: rgb(0.48, 0.23, 0.93) });
-      p1.drawText('PDF MASTER — DOCUMENT DE DÉMONSTRATION', { x: 65, y: 762, size: 17, font: fontBold, color: rgb(1, 1, 1) });
-      p1.drawText('Lecteur & Éditeur 100% Local · Ultra-Fluide Mobile & Desktop', { x: 65, y: 740, size: 11, font: fontReg, color: rgb(0.92, 0.89, 1) });
+      p1.drawText('PDF MASTER — LECTURE & ÉDITION SÉPARÉES', { x: 65, y: 762, size: 16, font: fontBold, color: rgb(1, 1, 1) });
+      p1.drawText('Zoom Pincement, Double-Tap, Molette · 100% Local Mobile & Ordi', { x: 65, y: 740, size: 11, font: fontReg, color: rgb(0.92, 0.89, 1) });
 
-      p1.drawText('1. Lecture rapide & Navigation sans fioritures', { x: 50, y: 680, size: 14, font: fontBold, color: rgb(0.1, 0.12, 0.2) });
-      p1.drawText('• Défilement 60 fps avec rendu haute densité Retina / Mobile.', { x: 60, y: 655, size: 11.5, font: fontReg, color: rgb(0.25, 0.3, 0.38) });
-      p1.drawText('• Mode Nuit, Sépia ou Contraste élevé en un clic dans la barre supérieure.', { x: 60, y: 635, size: 11.5, font: fontReg, color: rgb(0.25, 0.3, 0.38) });
-      p1.drawText('• Recherche plein texte instantanée (Cmd/Ctrl + F).', { x: 60, y: 615, size: 11.5, font: fontReg, color: rgb(0.25, 0.3, 0.38) });
+      p1.drawText('1. Mode LECTURE (Actif par défaut)', { x: 50, y: 680, size: 14, font: fontBold, color: rgb(0.1, 0.12, 0.2) });
+      p1.drawText('• Zoomez jusqu’à 400% avec 2 doigts (pincement), double-clic/tap, ou les boutons - / +.', { x: 60, y: 655, size: 11.5, font: fontReg, color: rgb(0.25, 0.3, 0.38) });
+      p1.drawText('• Déplacez-vous librement dans la page zoomée sans risquer de modifier le document.', { x: 60, y: 635, size: 11.5, font: fontReg, color: rgb(0.25, 0.3, 0.38) });
+      p1.drawText('• Filtres Nuit / Sépia / Contraste et Recherche texte dans la barre du bas.', { x: 60, y: 615, size: 11.5, font: fontReg, color: rgb(0.25, 0.3, 0.38) });
 
-      p1.drawText('2. Outils d’édition directe (Barre inférieure)', { x: 50, y: 565, size: 14, font: fontBold, color: rgb(0.1, 0.12, 0.2) });
-      p1.drawText('• Texte : Cliquez n’importe où sur la page pour remplir un formulaire.', { x: 60, y: 540, size: 11.5, font: fontReg, color: rgb(0.25, 0.3, 0.38) });
-      p1.drawText('• Surligneur & Stylo : Tracez au doigt, à l’Apple Pencil ou à la souris.', { x: 60, y: 520, size: 11.5, font: fontReg, color: rgb(0.25, 0.3, 0.38) });
-      p1.drawText('• Masquer (Blanc correcteur) : Effacez proprement une zone avant de réécrire.', { x: 60, y: 500, size: 11.5, font: fontReg, color: rgb(0.25, 0.3, 0.38) });
-      p1.drawText('• Signer & Tampon : Ajoutez votre signature manuscrite ou un cachet daté.', { x: 60, y: 480, size: 11.5, font: fontReg, color: rgb(0.25, 0.3, 0.38) });
+      p1.drawText('2. Mode ÉDITION (Bouton « Édition » en haut)', { x: 50, y: 565, size: 14, font: fontBold, color: rgb(0.1, 0.12, 0.2) });
+      p1.drawText('• Basculez sur « Édition » en haut de l’écran pour afficher la barre d’outils.', { x: 60, y: 540, size: 11.5, font: fontReg, color: rgb(0.25, 0.3, 0.38) });
+      p1.drawText('• Ajoutez du Texte, Surlignez, dessinez au Stylo, Masquez au blanc, Signez ou Tamponnez.', { x: 60, y: 520, size: 11.5, font: fontReg, color: rgb(0.25, 0.3, 0.38) });
 
-      // Sample form box to test filling & signing
       p1.drawRectangle({ x: 50, y: 220, width: 495, height: 210, borderColor: rgb(0.75, 0.8, 0.86), borderWidth: 1.5, color: rgb(0.97, 0.98, 1) });
-      p1.drawText('ZONE D’ESSAI — FORMULAIRE & SIGNATURE', { x: 70, y: 398, size: 13, font: fontBold, color: rgb(0.48, 0.23, 0.93) });
+      p1.drawText('ZONE D’ESSAI — PASSEZ EN MODE « ÉDITION » POUR REMPLIR', { x: 70, y: 398, size: 12.5, font: fontBold, color: rgb(0.48, 0.23, 0.93) });
       p1.drawText('Nom / Prénom : ________________________________________________', { x: 70, y: 360, size: 12, font: fontReg, color: rgb(0.2, 0.24, 0.3) });
       p1.drawText('Service / Hôpital : _____________________________________________', { x: 70, y: 325, size: 12, font: fontReg, color: rgb(0.2, 0.24, 0.3) });
       p1.drawText('Date : ____ / ____ / 2026', { x: 70, y: 290, size: 12, font: fontReg, color: rgb(0.2, 0.24, 0.3) });
       p1.drawText('Signature & Cachet :', { x: 330, y: 290, size: 12, font: fontBold, color: rgb(0.2, 0.24, 0.3) });
       p1.drawRectangle({ x: 330, y: 235, width: 190, height: 45, borderColor: rgb(0.6, 0.65, 0.75), borderWidth: 1, color: rgb(1, 1, 1) });
 
-      // Page 2
       const p2 = doc.addPage([595.28, 841.89]);
       p2.drawText('PAGE 2 — GESTION DES PAGES (ROTATION, FUSION, EXTRACTION)', { x: 50, y: 770, size: 14, font: fontBold, color: rgb(0.1, 0.12, 0.2) });
       p2.drawText('Ouvrez le volet latéral gauche (icône en haut à gauche) pour :', { x: 50, y: 735, size: 12, font: fontReg, color: rgb(0.25, 0.3, 0.38) });
@@ -1535,7 +1657,7 @@
       await loadPdfFromBytes(bytes, 'Demo-PDF-Master.pdf');
     });
 
-    // Core Loader: Load PDF from Uint8Array
+    // Core Loader
     async function loadPdfFromBytes(bytes, fileName, preserveAnnotations = false) {
       try {
         state.pdfBytes = new Uint8Array(bytes);
@@ -1546,7 +1668,6 @@
           updateUndoButton();
         }
 
-        // Load into PDF.js (pass a copy because worker transfers ArrayBuffer)
         const loadingTask = pdfjsLib.getDocument({ data: state.pdfBytes.slice(0) });
         state.pdfDoc = await loadingTask.promise;
         state.pageCount = state.pdfDoc.numPages;
@@ -1554,41 +1675,35 @@
         state.renderedPages.clear();
         state.pageDimensions = {};
 
-        // Update UI visibility
         els.emptyState.style.display = 'none';
         els.pagesContainer.style.display = 'flex';
         els.docTitleInput.style.display = 'inline-block';
         els.docTitleInput.value = state.fileName;
-        els.navControls.style.display = 'flex';
+        els.modeSwitch.classList.add('visible');
         els.btnSavePdf.style.display = 'inline-flex';
         els.btnUndo.style.display = 'inline-flex';
-        els.btnSearchToggle.style.display = 'inline-flex';
-        els.btnFilterCycle.style.display = 'inline-flex';
         els.btnToggleSidebar.disabled = false;
-        els.bottomDock.classList.add('visible');
 
         els.pageCountLabel.textContent = state.pageCount;
         els.sidebarPageCount.textContent = state.pageCount;
         els.pageInput.max = state.pageCount;
         els.pageInput.value = state.currentPage;
 
-        // Calculate optimal base width to fit mobile or desktop screen
         const availW = Math.min(els.viewport.clientWidth - 24, 860);
-        state.baseWidth = Math.max(300, availW);
+        state.baseWidth = Math.max(290, availW);
         state.zoom = 1.0;
         els.zoomLabel.textContent = '100%';
 
         await buildPagePlaceholders();
         renderSidebarThumbnails();
+        setAppMode(state.appMode || 'read');
         saveRecentFile(state.fileName, state.pdfBytes);
-        showToast(`${state.fileName} (${state.pageCount} p.)`);
       } catch (err) {
         console.error(err);
         showToast('Erreur de lecture du PDF');
       }
     }
 
-    // Build page containers and setup IntersectionObserver for 60fps lazy rendering
     let pageObserver = null;
     async function buildPagePlaceholders() {
       els.pagesContainer.innerHTML = '';
@@ -1628,7 +1743,6 @@
         annoLayer.className = 'annotation-layer';
         annoLayer.dataset.page = p;
 
-        // SVG layer for freehand pen, highlighter & whiteout
         const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
         svg.setAttribute('class', 'draw-svg');
         svg.setAttribute('viewBox', '0 0 1000 1000');
@@ -1644,7 +1758,6 @@
       }
     }
 
-    // High-DPI Canvas rendering for a page
     async function renderMainPage(pageNum, force = false) {
       if (!force && state.renderedPages.has(pageNum)) return;
       state.renderedPages.add(pageNum);
@@ -1667,7 +1780,6 @@
       await page.render({ canvasContext: ctx, viewport }).promise;
     }
 
-    // Render left sidebar thumbnails and page management controls
     async function renderSidebarThumbnails() {
       els.thumbList.innerHTML = '';
       for (let p = 1; p <= state.pageCount; p++) {
@@ -1710,7 +1822,6 @@
 
         els.thumbList.appendChild(card);
 
-        // Render low-res thumbnail asynchronously
         state.pdfDoc.getPage(p).then(page => {
           const vp = page.getViewport({ scale: 0.25 });
           canvas.width = vp.width;
@@ -1720,7 +1831,6 @@
       }
     }
 
-    // Scroll tracking to update currentPage indicator
     els.viewport.addEventListener('scroll', () => {
       if (!state.pdfDoc) return;
       const wrappers = els.pagesContainer.querySelectorAll('.page-wrapper');
@@ -1754,14 +1864,32 @@
       }
     }
 
-    // Navigation & Zoom Events
     document.getElementById('btnPrevPage').addEventListener('click', () => scrollToPage(state.currentPage - 1));
     document.getElementById('btnNextPage').addEventListener('click', () => scrollToPage(state.currentPage + 1));
     els.pageInput.addEventListener('change', (e) => scrollToPage(parseInt(e.target.value, 10) || 1));
 
-    function setZoom(newZoom) {
+    // =========================================================================
+    // FLUID ZOOM ENGINE (Buttons, Pinch-to-Zoom, Ctrl+Wheel, Double-Tap)
+    // =========================================================================
+    let zoomReRenderTimer = null;
+
+    function setZoom(newZoom, focalPoint = null) {
       if (!state.pdfDoc) return;
-      state.zoom = Math.max(0.5, Math.min(3.0, newZoom));
+      const prevZoom = state.zoom;
+      const clamped = Math.max(0.5, Math.min(4.0, newZoom));
+      if (Math.abs(clamped - prevZoom) < 0.005) return;
+
+      // Keep focal point stable during zoom
+      const vp = els.viewport;
+      const rect = vp.getBoundingClientRect();
+      const fx = focalPoint ? (focalPoint.x - rect.left) : (vp.clientWidth / 2);
+      const fy = focalPoint ? (focalPoint.y - rect.top) : (vp.clientHeight / 2);
+      const ratio = clamped / prevZoom;
+
+      const nextScrollLeft = (vp.scrollLeft + fx) * ratio - fx;
+      const nextScrollTop = (vp.scrollTop + fy) * ratio - fy;
+
+      state.zoom = clamped;
       els.zoomLabel.textContent = `${Math.round(state.zoom * 100)}%`;
 
       const wrappers = els.pagesContainer.querySelectorAll('.page-wrapper');
@@ -1776,13 +1904,116 @@
         renderAnnotationsForPage(p);
       });
 
-      state.renderedPages.clear();
-      renderMainPage(state.currentPage, true);
+      vp.scrollLeft = Math.max(0, nextScrollLeft);
+      vp.scrollTop = Math.max(0, nextScrollTop);
+
+      // Debounce high-DPI re-render so pinch-zoom is 60fps smooth
+      clearTimeout(zoomReRenderTimer);
+      zoomReRenderTimer = setTimeout(() => {
+        state.renderedPages.clear();
+        renderMainPage(state.currentPage, true);
+        if (state.currentPage > 1) renderMainPage(state.currentPage - 1, true);
+        if (state.currentPage < state.pageCount) renderMainPage(state.currentPage + 1, true);
+      }, 140);
     }
 
-    document.getElementById('btnZoomIn').addEventListener('click', () => setZoom(state.zoom + 0.2));
-    document.getElementById('btnZoomOut').addEventListener('click', () => setZoom(state.zoom - 0.2));
+    document.getElementById('btnZoomIn').addEventListener('click', () => setZoom(state.zoom + 0.25));
+    document.getElementById('btnZoomOut').addEventListener('click', () => setZoom(state.zoom - 0.25));
     els.zoomLabel.addEventListener('click', () => setZoom(1.0));
+
+    // Trackpad Pinch / Ctrl+Wheel Zoom on Desktop
+    els.viewport.addEventListener('wheel', (e) => {
+      if (!state.pdfDoc) return;
+      if (e.ctrlKey || e.metaKey) {
+        e.preventDefault();
+        const factor = e.deltaY < 0 ? 1.1 : 0.9;
+        setZoom(state.zoom * factor, { x: e.clientX, y: e.clientY });
+      }
+    }, { passive: false });
+
+    // Touch Pinch-to-Zoom on Mobile & Tablet
+    let pinchStartDist = 0;
+    let pinchStartZoom = 1.0;
+
+    els.viewport.addEventListener('touchstart', (e) => {
+      if (!state.pdfDoc) return;
+      if (e.touches.length === 2) {
+        e.preventDefault();
+        const dx = e.touches[0].clientX - e.touches[1].clientX;
+        const dy = e.touches[0].clientY - e.touches[1].clientY;
+        pinchStartDist = Math.hypot(dx, dy);
+        pinchStartZoom = state.zoom;
+      }
+    }, { passive: false });
+
+    els.viewport.addEventListener('touchmove', (e) => {
+      if (!state.pdfDoc) return;
+      if (e.touches.length === 2 && pinchStartDist > 0) {
+        e.preventDefault();
+        const dx = e.touches[0].clientX - e.touches[1].clientX;
+        const dy = e.touches[0].clientY - e.touches[1].clientY;
+        const dist = Math.hypot(dx, dy);
+        const center = {
+          x: (e.touches[0].clientX + e.touches[1].clientX) / 2,
+          y: (e.touches[0].clientY + e.touches[1].clientY) / 2
+        };
+        setZoom(pinchStartZoom * (dist / pinchStartDist), center);
+      }
+    }, { passive: false });
+
+    els.viewport.addEventListener('touchend', (e) => {
+      if (e.touches.length < 2) {
+        pinchStartDist = 0;
+      }
+    });
+
+    // Double-Tap / Double-Click in Reading Mode to toggle 100% <-> 200% zoom at tap point
+    let lastTapTime = 0;
+    els.viewport.addEventListener('pointerup', (e) => {
+      if (!state.pdfDoc || state.appMode !== 'read') return;
+      if (e.pointerType === 'touch') {
+        const now = Date.now();
+        if (now - lastTapTime < 280) {
+          const nextZ = state.zoom > 1.3 ? 1.0 : 2.0;
+          setZoom(nextZ, { x: e.clientX, y: e.clientY });
+          lastTapTime = 0;
+        } else {
+          lastTapTime = now;
+        }
+      }
+    });
+
+    els.viewport.addEventListener('dblclick', (e) => {
+      if (!state.pdfDoc || state.appMode !== 'read') return;
+      const nextZ = state.zoom > 1.3 ? 1.0 : 2.0;
+      setZoom(nextZ, { x: e.clientX, y: e.clientY });
+    });
+
+    // Click-and-Drag Pan on Desktop when in Reading Mode
+    let isGrabPanning = false;
+    let panStartX = 0, panStartY = 0, panScrollLeft = 0, panScrollTop = 0;
+
+    els.viewport.addEventListener('mousedown', (e) => {
+      if (!state.pdfDoc || state.appMode !== 'read') return;
+      if (e.button !== 0) return;
+      isGrabPanning = true;
+      els.viewport.classList.add('grab-pan');
+      panStartX = e.clientX;
+      panStartY = e.clientY;
+      panScrollLeft = els.viewport.scrollLeft;
+      panScrollTop = els.viewport.scrollTop;
+    });
+
+    window.addEventListener('mousemove', (e) => {
+      if (!isGrabPanning) return;
+      els.viewport.scrollLeft = panScrollLeft - (e.clientX - panStartX);
+      els.viewport.scrollTop = panScrollTop - (e.clientY - panStartY);
+    });
+
+    window.addEventListener('mouseup', () => {
+      isGrabPanning = false;
+      els.viewport.classList.remove('grab-pan');
+    });
 
     // Toggle Sidebar
     els.btnToggleSidebar.addEventListener('click', () => {
@@ -1797,24 +2028,27 @@
       els.docTitleInput.value = val;
     });
 
-    // Tool Selection & Contextual Bar
+    // =========================================================================
+    // EDITING TOOLS (Active only when state.appMode === 'edit')
+    // =========================================================================
     function setActiveTool(tool) {
       state.activeTool = tool;
-      els.bottomDock.querySelectorAll('.dock-btn[data-tool]').forEach(btn => {
+      els.editDock.querySelectorAll('.dock-btn[data-tool]').forEach(btn => {
         btn.classList.toggle('active', btn.dataset.tool === tool);
       });
 
-      els.viewport.classList.toggle('drawing-mode', ['pen', 'highlight', 'whiteout'].includes(tool));
+      els.viewport.classList.toggle('drawing-mode', state.appMode === 'edit' && ['pen', 'highlight', 'whiteout'].includes(tool));
 
-      // Deselect any active annotation when switching tools
       document.querySelectorAll('.anno-item.selected').forEach(el => el.classList.remove('selected'));
 
-      if (tool === 'pan') {
+      if (state.appMode !== 'edit' || tool === 'select') {
         els.toolOptionsBar.classList.remove('visible');
       } else {
         els.toolOptionsBar.classList.add('visible');
         els.stampGroup.style.display = tool === 'stamp' ? 'flex' : 'none';
-        document.getElementById('colorGroup').style.display = (tool === 'whiteout' || tool === 'stamp') ? 'none' : 'flex';
+        const showColors = !(tool === 'whiteout' || tool === 'stamp');
+        document.getElementById('colorGroup').style.display = showColors ? 'flex' : 'none';
+        document.getElementById('optDivider').style.display = showColors ? 'block' : 'none';
         document.getElementById('sizeGroup').style.display = tool === 'stamp' ? 'none' : 'flex';
 
         if (tool === 'highlight') {
@@ -1840,7 +2074,7 @@
       }
     }
 
-    els.bottomDock.querySelectorAll('.dock-btn[data-tool]').forEach(btn => {
+    els.editDock.querySelectorAll('.dock-btn[data-tool]').forEach(btn => {
       btn.addEventListener('click', () => setActiveTool(btn.dataset.tool));
     });
 
@@ -1849,7 +2083,6 @@
       document.querySelectorAll('#colorGroup .color-swatch').forEach(s => {
         s.classList.toggle('active', s.dataset.color === color);
       });
-      // Update selected text annotation if any
       const selected = document.querySelector('.anno-item.selected');
       if (selected) {
         const p = parseInt(selected.closest('.annotation-layer').dataset.page, 10);
@@ -1879,7 +2112,6 @@
       }
     });
 
-    // Stamp quick buttons
     document.querySelectorAll('.stamp-pill').forEach(pill => {
       pill.addEventListener('click', () => {
         let label = pill.dataset.stamp;
@@ -1896,12 +2128,11 @@
           y: 0.42,
           fontSize: 18
         });
-        setActiveTool('pan');
+        setActiveTool('select');
         showToast(`Tampon « ${label} » ajouté`);
       });
     });
 
-    // Annotations Engine (Normalized 0..1 coordinates so zoom/resize never shifts positions)
     function addAnnotation(pageNum, anno) {
       if (!state.annotations[pageNum]) state.annotations[pageNum] = [];
       state.annotations[pageNum].push(anno);
@@ -1928,14 +2159,13 @@
       showToast('Action annulée');
     });
 
-    // Setup pointer interactions on each page's annotation layer
     function setupPageInteraction(layer, pageNum) {
       let currentStroke = null;
 
       layer.addEventListener('pointerdown', (e) => {
+        if (state.appMode !== 'edit') return;
         if (e.target.closest('.anno-item')) return;
 
-        // Deselect existing items
         document.querySelectorAll('.anno-item.selected').forEach(el => el.classList.remove('selected'));
 
         const rect = layer.getBoundingClientRect();
@@ -1953,7 +2183,7 @@
             color: state.toolColor,
             fontSize: state.toolSize
           });
-          setActiveTool('pan');
+          setActiveTool('select');
           setTimeout(() => {
             const created = layer.querySelector(`.anno-item[data-id="${id}"] .anno-text`);
             if (created) {
@@ -1975,7 +2205,7 @@
             y: Math.min(0.9, Math.max(0.05, ny - 0.02)),
             fontSize: 18
           });
-          setActiveTool('pan');
+          setActiveTool('select');
           return;
         }
 
@@ -2038,8 +2268,6 @@
       if (!layer) return;
 
       renderSvgPathsForPage(pageNum);
-
-      // Clear DOM overlay items and rebuild
       layer.querySelectorAll('.anno-item').forEach(el => el.remove());
 
       const annos = (state.annotations[pageNum] || []).filter(a => a.type !== 'path');
@@ -2050,7 +2278,6 @@
         itemEl.style.left = `${anno.x * 100}%`;
         itemEl.style.top = `${anno.y * 100}%`;
 
-        // Delete button toolbar
         const ctrls = document.createElement('div');
         ctrls.className = 'anno-controls';
         const delBtn = document.createElement('button');
@@ -2067,7 +2294,7 @@
         if (anno.type === 'text') {
           const textDiv = document.createElement('div');
           textDiv.className = 'anno-text';
-          textDiv.contentEditable = 'true';
+          textDiv.contentEditable = state.appMode === 'edit' ? 'true' : 'false';
           textDiv.textContent = anno.text;
           textDiv.style.color = anno.color;
           textDiv.style.fontSize = `${anno.fontSize * state.zoom}px`;
@@ -2106,6 +2333,7 @@
       let startX = 0, startY = 0, origX = 0, origY = 0;
 
       itemEl.addEventListener('pointerdown', (e) => {
+        if (state.appMode !== 'edit') return;
         if (e.target.classList.contains('resize-handle') || e.target.classList.contains('anno-ctrl-btn')) return;
         document.querySelectorAll('.anno-item.selected').forEach(el => el.classList.remove('selected'));
         itemEl.classList.add('selected');
@@ -2232,7 +2460,7 @@
         h: 0.11
       });
       els.sigModal.classList.remove('open');
-      setActiveTool('pan');
+      setActiveTool('select');
       showToast('Signature ajoutée — glissez pour la positionner');
     });
 
@@ -2262,7 +2490,7 @@
             w,
             h: Math.min(0.6, h)
           });
-          setActiveTool('pan');
+          setActiveTool('select');
           showToast('Image insérée');
         };
         img.src = reader.result;
@@ -2270,8 +2498,8 @@
       reader.readAsDataURL(file);
     }
 
-    // PAGE STRUCTURAL OPERATIONS (Rotate, Reorder, Delete, Blank Page, Merge PDF)
-    document.getElementById('btnRotateCurrent').addEventListener('click', () => {
+    // PAGE STRUCTURAL OPERATIONS
+    document.getElementById('btnReadRotate').addEventListener('click', () => {
       if (!state.pdfDoc) return;
       handlePageAction(state.currentPage, 'rot');
     });
@@ -2403,7 +2631,6 @@
       }
     }
 
-    // Add Blank Page
     document.getElementById('btnAddBlankPage').addEventListener('click', async () => {
       if (!state.pdfDoc) return;
       const { PDFDocument } = PDFLib;
@@ -2417,7 +2644,6 @@
       showToast('Page vierge ajoutée');
     });
 
-    // Merge another PDF
     document.getElementById('btnMergePdf').addEventListener('click', () => els.fileInputMerge.click());
     els.fileInputMerge.addEventListener('change', async (e) => {
       const file = e.target.files[0];
@@ -2435,7 +2661,7 @@
       e.target.value = '';
     });
 
-    // EXPORT & DOWNLOAD MODIFIED PDF
+    // EXPORT
     els.btnSavePdf.addEventListener('click', exportFinalPdf);
 
     async function exportFinalPdf() {
@@ -2470,7 +2696,7 @@
       };
     }
 
-    // FULL-TEXT SEARCH ACROSS PAGES
+    // SEARCH
     els.btnSearchToggle.addEventListener('click', () => {
       els.searchPopover.classList.toggle('open');
       if (els.searchPopover.classList.contains('open')) {
@@ -2523,7 +2749,7 @@
       scrollToPage(state.searchMatches[state.searchIdx]);
     });
 
-    // KEYBOARD SHORTCUTS (Desktop speed)
+    // KEYBOARD SHORTCUTS
     window.addEventListener('keydown', (e) => {
       const activeTag = document.activeElement?.tagName;
       const isEditingText = activeTag === 'INPUT' || activeTag === 'TEXTAREA' || document.activeElement?.isContentEditable;
@@ -2553,11 +2779,35 @@
         return;
       }
 
+      if ((e.metaKey || e.ctrlKey) && (e.key === '=' || e.key === '+')) {
+        if (state.pdfDoc) {
+          e.preventDefault();
+          setZoom(state.zoom + 0.25);
+        }
+        return;
+      }
+
+      if ((e.metaKey || e.ctrlKey) && e.key === '-') {
+        if (state.pdfDoc) {
+          e.preventDefault();
+          setZoom(state.zoom - 0.25);
+        }
+        return;
+      }
+
+      if ((e.metaKey || e.ctrlKey) && e.key === '0') {
+        if (state.pdfDoc) {
+          e.preventDefault();
+          setZoom(1.0);
+        }
+        return;
+      }
+
       if (isEditingText) return;
 
       if (e.key === 'Delete' || e.key === 'Backspace') {
         const selected = document.querySelector('.anno-item.selected');
-        if (selected) {
+        if (selected && state.appMode === 'edit') {
           e.preventDefault();
           const p = parseInt(selected.closest('.annotation-layer').dataset.page, 10);
           removeAnnotation(p, selected.dataset.id);
@@ -2566,16 +2816,8 @@
         if (state.pdfDoc) scrollToPage(state.currentPage + 1);
       } else if (e.key === 'ArrowLeft' || e.key === 'PageUp') {
         if (state.pdfDoc) scrollToPage(state.currentPage - 1);
-      } else if (e.key.toLowerCase() === 'v' || e.key === 'Escape') {
-        setActiveTool('pan');
-      } else if (e.key.toLowerCase() === 't') {
-        if (state.pdfDoc) setActiveTool('text');
-      } else if (e.key.toLowerCase() === 'h') {
-        if (state.pdfDoc) setActiveTool('highlight');
-      } else if (e.key.toLowerCase() === 'd') {
-        if (state.pdfDoc) setActiveTool('pen');
-      } else if (e.key.toLowerCase() === 'w') {
-        if (state.pdfDoc) setActiveTool('whiteout');
+      } else if (e.key === 'Escape') {
+        if (state.appMode === 'edit') setActiveTool('select');
       }
     });
   </script>
