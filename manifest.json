@@ -1,0 +1,17 @@
+{
+  "name": "PDF Master — Lecteur & Éditeur Ultra-Fluide",
+  "short_name": "PDF Master",
+  "description": "Lecteur et éditeur PDF ultra-fluide sans fioritures, 100% local (texte, signature, surligneur, tampon, réorganisation, fusion/extraction).",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#0f172a",
+  "theme_color": "#7c3aed",
+  "icons": [
+    {
+      "src": "assets/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
